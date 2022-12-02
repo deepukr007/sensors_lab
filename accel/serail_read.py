@@ -124,11 +124,10 @@ plt.plot(range, x , color = 'green')
 plt.plot(range, y ,color = 'blue' )
 plt.plot(range , z , color = 'red')
 plt.xlabel('Time in s')
-plt.ylabel('Acceleration in m/s2')
+plt.ylabel('Acceleration in m/s^2')
 plt.title('Acceleration')
 plt.legend(["x", "y" ,"z"] , loc="upper right")
 plt.savefig('xyz_data')
-
 
 
 
