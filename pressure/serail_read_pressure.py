@@ -52,7 +52,7 @@ print (pressure_sub)
 
 plt.figure(1)
 plt.hist(pressure , bins='auto')
-plt.xlabel('pressure in Pa')
+plt.xlabel('Pressure in Pa')
 plt.ylabel('Frequency')
 plt.title('Histogram of Pressure')
 plt.savefig('hist_pressure')
