@@ -112,8 +112,8 @@ plt.plot(time[2:]/1000, accel_height , color='green')
 plt.xlabel('Time in s')
 plt.ylabel('Heigt in m')
 plt.title('Height v/s Time')
+plt.legend(["Height from Pressure Sensor" , "Height from Accelerometer"] , loc="upper right")
 plt.savefig('HeightvsTime')
-plt.legend(["Height from Pressure Sensor" , "Height from Accelerometer"])
 
 
 
