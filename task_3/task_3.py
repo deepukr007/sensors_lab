@@ -64,14 +64,18 @@ print (h_pa)
 z_mean = np.mean(z)
 z_sub = z-z_mean
 
-velocity = integrate.cumulative_trapezoid(z_sub, time)
+time_check = time / 1000 
+
+velocity = integrate.cumulative_trapezoid(z_sub, time_check)
 
 velocity_mean = np.mean(velocity)
 velocity_sub = velocity - velocity_mean
 
-height =  integrate.cumulative_trapezoid(velocity_sub, time[1:])
+accel_height =  integrate.cumulative_trapezoid(velocity_sub, time_check[1:])
 
+ground_height = h_pa[1]
 
+h_pa_ref = h_pa - ground_height
     
 plt.figure(1)
 plt.plot(time/1000 , pressure*100 , color = 'red')
@@ -103,11 +107,15 @@ plt.savefig('Velocityvstime')
 
 
 plt.figure(5)
-plt.plot(time[2:]/1000,height)
+plt.plot(time/1000 , h_pa_ref , color = 'blue')
+plt.plot(time[2:]/1000, accel_height , color='green')
 plt.xlabel('Time in s')
 plt.ylabel('Heigt in m')
 plt.title('Height v/s Time')
-plt.savefig('HeightvsTime_accel')
+plt.savefig('HeightvsTime')
+plt.legend(["Height from Pressure Sensor" , "Height from Accelerometer"])
+
+
 
 
 plt.show() 
