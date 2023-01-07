@@ -2,6 +2,7 @@ import serial
 import time
 import matplotlib.pyplot as plt
 import numpy as np
+from scipy.stats import norm
 
 x = input()
 
@@ -51,7 +52,10 @@ print (pressure_sub)
 
 
 plt.figure(1)
-plt.hist(pressure , bins='auto')
+_,bins,_=plt.hist(pressure , bins='auto', density=True)
+m, s = norm.fit(pressure)
+p = norm.pdf(bins, m, s) * 5
+plt.plot(bins, p,'r' , alpha=.4)
 plt.xlabel('Pressure in Pa')
 plt.ylabel('Frequency')
 plt.title('Histogram of Pressure')
@@ -60,7 +64,10 @@ plt.savefig('hist_pressure')
 
 
 plt.figure(2)
-plt.hist(pressure_sub , bins='auto')
+_,bins,_ = plt.hist(pressure_sub , bins='auto', density=True)
+m, s = norm.fit(pressure_sub)
+p = norm.pdf(bins, m, s) * 5
+plt.plot(bins, p, 'r' , alpha=.4)
 plt.xlabel('Mean subtracted values')
 plt.ylabel('Frequency')
 plt.title('Histogram of p-pmean')

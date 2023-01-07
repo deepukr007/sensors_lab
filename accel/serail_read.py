@@ -2,8 +2,7 @@ import serial
 import time
 import matplotlib.pyplot as plt
 import numpy as np
-
-
+from scipy.stats import norm
 
 x = []
 y = []
@@ -95,14 +94,20 @@ print (x_sub)
 
 
 plt.figure(1)
-plt.hist(x_sub , bins='auto')
+_, bins,_ =plt.hist(x_sub , bins=18, density=True )
+m, s = norm.fit(x_sub)
+p = norm.pdf(bins, m, s) 
+plt.plot(bins, p, 'r', alpha=.5)
 plt.xlabel('x-x_mean')
 plt.ylabel('Frequency of values')
 plt.title('Histogram : x - x_mean')
 plt.savefig('hist_xsubt')
 
 plt.figure(2)
-plt.hist(y_sub , bins='auto')
+_,bins,_=plt.hist(y_sub , bins='auto', density=True)
+m, s = norm.fit(y_sub)
+p = norm.pdf(bins, m, s) * 2
+plt.plot(bins, p, 'r', alpha=.5)
 plt.xlabel('y-y_mean')
 plt.ylabel('Frequency of values')
 plt.title('Histogram : y - y_mean')
@@ -110,7 +115,10 @@ plt.savefig('hist_ysubt')
 
 
 plt.figure(3)
-plt.hist(z_sub , bins='auto')
+_, bins ,_ = plt.hist(z_sub , bins='auto', density=True)
+m, s = norm.fit(z_sub)
+p = norm.pdf(bins, m, s) * 2
+plt.plot(bins, p, 'r', alpha=.5)
 plt.xlabel('z-z_mean')
 plt.ylabel('Frequency of values')
 plt.title('Histogram : z - z_mean')
