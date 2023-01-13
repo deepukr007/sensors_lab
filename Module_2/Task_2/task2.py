@@ -169,9 +169,24 @@ print(af_mag_data_Z_sd)
 
 print("Offest")
 print("X", end=' ')
-print(abs(bf_mag_data_X_mean - af_mag_data_X_mean))
+print((bf_mag_data_X_mean + af_mag_data_X_mean)/2)
 print("Y", end=' ')
-print(abs(bf_mag_data_Y_mean - af_mag_data_Y_mean))
+print((bf_mag_data_Y_mean + af_mag_data_Y_mean)/2)
 print("Z", end=' ')
-print(abs(bf_mag_data_Z_mean - af_mag_data_Z_mean))
+print((bf_mag_data_Z_mean + af_mag_data_Z_mean)/2)
 
+print("Offest (min max way)")
+max_x = np.max(np.concatenate((bf_mag_data_X , af_mag_data_X)))
+max_y = np.max(np.concatenate((bf_mag_data_Y , af_mag_data_Y)))
+max_z = np.max(np.concatenate((bf_mag_data_Z , af_mag_data_Z)))
+
+min_x = np.min(np.concatenate((bf_mag_data_X , af_mag_data_X)))
+min_y = np.min(np.concatenate((bf_mag_data_Y , af_mag_data_Y)))
+min_z = np.min(np.concatenate((bf_mag_data_Z , af_mag_data_Z)))
+
+
+print(min_x + (max_x - min_x) / 2)
+print(min_y + (max_y - min_y) / 2)
+print(min_z + (max_z - min_z) / 2)
+
+print()
