@@ -2,6 +2,7 @@ import serial
 import time
 import matplotlib.pyplot as plt
 import numpy as np
+from scipy.stats import norm
 
 x = input()
 
@@ -73,24 +74,33 @@ else:
 
 
 plt.figure(1)
-_, bins,_ = plt.hist(mag_data_X_mean_sub , bins=20 , density=True)
-plt.xlabel('x-x_mean')
+_, bins,_ = plt.hist(mag_data_X_mean_sub , bins=50 , density=True, align='mid' , color='#008631')
+m, s = norm.fit(mag_data_X_mean_sub)
+p = norm.pdf(bins, m, s) * 2
+plt.plot(bins, p, 'k', alpha=.7)
+plt.xlabel(r'$B_x-\overline{B_x}$' + u" in \u03bcT")
 plt.ylabel('Frequency of values')
-plt.title('Histogram : x - x_mean')
+plt.title(r'Histogram of : $B_x-\overline{B_x}$')
 plt.savefig('hist_xsubt')
 
 plt.figure(2)
-_, bins,_ =plt.hist(mag_data_Y_mean_sub , bins=20 , density=True)
-plt.xlabel('y-y_mean')
+_, bins,_ =plt.hist(mag_data_Y_mean_sub , bins=50 , density=True ,  color='#008631')
+m, s = norm.fit(mag_data_Y_mean_sub)
+p = norm.pdf(bins, m, s) * 4.5
+plt.plot(bins, p, 'k', alpha=.7)
+plt.xlabel(r'$B_y-\overline{B_y}$' + u" in \u03bcT")
 plt.ylabel('Frequency of values')
-plt.title('Histogram : y - y_mean')
+plt.title(r'Histogram of : $B_y-\overline{B_y}$')
 plt.savefig('hist_ysubt')
 
 plt.figure(3)
-_, bins,_ =plt.hist(mag_data_Z_mean_sub , bins=25 , density=True)
-plt.xlabel('z-z_mean')
+_, bins,_ =plt.hist(mag_data_Z_mean_sub , bins=50 , density=True ,  color='#008631')
+m, s = norm.fit(mag_data_Z_mean_sub)
+p = norm.pdf(bins, m, s) * 3.5
+plt.plot(bins, p, 'k', alpha=.7)
+plt.xlabel(r'$B_z-\overline{B_z}$' + u" in \u03bcT")
 plt.ylabel('Frequency of values')
-plt.title('Histogram : z - z_mean')
+plt.title(r'Histogram of : $B_z-\overline{B_z}$')
 plt.savefig('hist_zsubt')
 
 range = (np.arange(0 , (mag_data_X.size*100) , 100))/1000
@@ -100,8 +110,8 @@ plt.plot(range , mag_data_X , color = 'green')
 plt.plot(range , mag_data_Y ,color = 'blue' )
 plt.plot(range , mag_data_Z , color = 'red')
 plt.xlabel('Time in s')
-plt.ylabel('-')
-plt.title('-')
+plt.ylabel('Magnetic flux in ' + u" in \u03bcT" )
+plt.title('Magnetic Flux readings')
 plt.legend(["x", "y" ,"z"] , loc="upper right")
 plt.savefig('xyz_data')
 
