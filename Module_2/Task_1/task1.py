@@ -74,7 +74,7 @@ else:
 
 
 plt.figure(1)
-_, bins,_ = plt.hist(mag_data_X_mean_sub , bins=50 , density=True, align='mid' , color='#008631')
+_, bins,_ = plt.hist(mag_data_X_mean_sub , bins=40 , density=True, align='mid' )
 m, s = norm.fit(mag_data_X_mean_sub)
 p = norm.pdf(bins, m, s) * 2
 plt.plot(bins, p, 'k', alpha=.7)
@@ -84,7 +84,7 @@ plt.title(r'Histogram of : $B_x-\overline{B_x}$')
 plt.savefig('hist_xsubt')
 
 plt.figure(2)
-_, bins,_ =plt.hist(mag_data_Y_mean_sub , bins=50 , density=True ,  color='#008631')
+_, bins,_ =plt.hist(mag_data_Y_mean_sub , bins=40 , density=True )
 m, s = norm.fit(mag_data_Y_mean_sub)
 p = norm.pdf(bins, m, s) * 4.5
 plt.plot(bins, p, 'k', alpha=.7)
@@ -94,9 +94,9 @@ plt.title(r'Histogram of : $B_y-\overline{B_y}$')
 plt.savefig('hist_ysubt')
 
 plt.figure(3)
-_, bins,_ =plt.hist(mag_data_Z_mean_sub , bins=50 , density=True ,  color='#008631')
+_, bins,_ =plt.hist(mag_data_Z_mean_sub , bins=40 , density=True )
 m, s = norm.fit(mag_data_Z_mean_sub)
-p = norm.pdf(bins, m, s) * 3.5
+p = norm.pdf(bins, m, s) * 3
 plt.plot(bins, p, 'k', alpha=.7)
 plt.xlabel(r'$B_z-\overline{B_z}$' + u" in \u03bcT")
 plt.ylabel('Frequency of values')
@@ -106,9 +106,9 @@ plt.savefig('hist_zsubt')
 range = (np.arange(0 , (mag_data_X.size*100) , 100))/1000
 
 plt.figure(4)
-plt.plot(range , mag_data_X , color = 'green')
-plt.plot(range , mag_data_Y ,color = 'blue' )
-plt.plot(range , mag_data_Z , color = 'red')
+plt.plot(range , mag_data_X , color = 'red')
+plt.plot(range , mag_data_Y ,color = 'green' )
+plt.plot(range , mag_data_Z , color = 'blue')
 plt.xlabel('Time in s')
 plt.ylabel('Magnetic flux in ' + u" in \u03bcT" )
 plt.title('Magnetic Flux readings')
