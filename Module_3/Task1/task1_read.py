@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from scipy.stats import norm
 
-ex_name = input('Exp_name')
+ex_name = input('Exp_name : ')
 file = 'outfile' + ex_name +'.npz'
 
 x = input()
@@ -14,7 +14,7 @@ if(x=='l'):
     gas = loaded['gas']
 
 else:
-    serial_obj = serial.Serial('COM8', 115200 , timeout=1)
+    serial_obj = serial.Serial('COM7', 115200 , timeout=1)
     time.sleep(1)
     serial_obj.flush()
     serial_obj.write("r".encode())
