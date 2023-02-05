@@ -1,7 +1,7 @@
 #include "Arduino_BHY2.h"
 
 
-SensorBSEC gas(SENSOR_ID_GAS);
+Sensor gas(SENSOR_ID_GAS);
 
 char a ;
 
