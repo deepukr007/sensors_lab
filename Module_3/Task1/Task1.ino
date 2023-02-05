@@ -30,7 +30,7 @@ void loop()
           Serial.println(gas.value());
         }
 
-     }s
+     }
 
     }
 }
