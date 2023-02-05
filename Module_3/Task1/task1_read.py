@@ -4,11 +4,13 @@ import matplotlib.pyplot as plt
 import numpy as np
 from scipy.stats import norm
 
+ex_name = input('Exp_name')
+file = 'outfile' + ex_name +'.npz'
+
 x = input()
 
 if(x=='l'):
-
-    loaded = np.load('outfile.npz')
+    loaded = np.load(file)
     gas = loaded['gas']
 
 else:
@@ -31,7 +33,7 @@ else:
     serial_obj.close()
     gas = np.array(gas , dtype = float)
  
-    np.savez('outfile',gas=gas )
+    np.savez(file,gas=gas )
 
 
 range = (np.arange(0 , (gas.size*100) , 100))/1000

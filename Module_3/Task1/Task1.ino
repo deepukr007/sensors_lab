@@ -1,7 +1,7 @@
 #include "Arduino_BHY2.h"
 
 
-SensorBSEC gas(SENSOR_ID_BSEC);
+SensorBSEC gas(SENSOR_ID_GAS);
 
 char a ;
 
@@ -28,7 +28,6 @@ void loop()
         { 
           lastCheck = millis();
           Serial.println(gas.value());
-            
         }
 
      }s
