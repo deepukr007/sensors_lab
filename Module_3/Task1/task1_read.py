@@ -2,7 +2,6 @@ import serial
 import time
 import matplotlib.pyplot as plt
 import numpy as np
-from scipy.stats import norm
 
 ex_name = input('Exp_name : ')
 file = 'outfile' + ex_name + '.npz'
@@ -41,8 +40,8 @@ range = (np.arange(0 , (gas.size)*10 , 10))
 plt.figure(1)
 plt.plot(range , gas , color = 'red')
 plt.xlabel('Time in s')
-plt.ylabel("Resitance" )
-plt.title('Gas sensor readings')
-plt.savefig('Gas_sensor_readings')
+plt.ylabel("Resitance in \u03A9" )
+plt.title('Gas sensor readings for Perfume')
+plt.savefig('Gas_sensor_readings_'+ex_name)
 
 plt.show() 
