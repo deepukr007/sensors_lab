@@ -95,22 +95,11 @@ xformatter = mdates.DateFormatter('%H:%M')
 plt.figure(1)
 plt.plot( x_range , iaq, color = 'red')
 plt.rcParams["figure.autolayout"] = True
-plt.xlabel('Time in m')
+plt.xlabel('Timestamp')
 plt.ylabel("IAQ" )
-plt.title('Gas sensor readings')
+plt.title('IAQ readings')
 plt.gcf().axes[0].xaxis.set_major_formatter(xformatter)
 plt.savefig('new'+'IAQ' )
 
-
-plt.show() 
-
-plt.figure(2)
-plt.plot(range , co2 , color = 'blue')
-plt.rcParams["figure.autolayout"] = True
-plt.xticks(np.arange(0,25))
-plt.xlabel('Time in s')
-plt.ylabel("Co2" )
-plt.title('Gas sensor readings')
-plt.savefig(ex_name+'co2')
 
 plt.show() 
