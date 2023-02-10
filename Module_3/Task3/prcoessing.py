@@ -1,26 +1,14 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import random
+from datetime import datetime , timedelta
 
-loaded = np.load('outfileiaq.npz')
-iaq = loaded['iaq']
-co2 = loaded['co2']
-hour = loaded['hour']
-minute = loaded['minute']
+time_str = '06::30::30'
+time_object = datetime.strptime(time_str, '%H::%M::%S')
 
+x_range = []
 
-
-range = np.arange(30 , (2880*30)+30, 30 , dtype=float)/3600
-
-
-plt.figure(1)
-plt.plot( range , iaq[0:2880] , color = 'red')
-plt.rcParams["figure.autolayout"] = True
-plt.xticks(np.arange(0,24))
-plt.xlabel('Time in m')
-plt.ylabel("IAQ" )
-plt.title('Gas sensor readings')
-plt.savefig('new'+'IAQ' )
-
-
-plt.show() 
+for i in range(2880):
+    delta = timedelta(seconds= 30)
+    time_object = time_object + delta
+    x_range.append(time_object.time())

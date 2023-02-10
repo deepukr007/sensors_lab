@@ -3,7 +3,8 @@ import time
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy.stats import norm
-from datetime import datetime
+from datetime import datetime , timedelta
+import matplotlib.dates as mdates
 
 ex_name = input('Exp_name : ')
 file = 'outfile' + ex_name +'.npz'
@@ -16,9 +17,6 @@ if(x=='l'):
     iaq = loaded['iaq'] 
     co2 = loaded['co2']
    
-
-
-
 
 else:
     serial_obj = serial.Serial('/dev/cu.usbmodem21CBF3D62', 115200 , timeout=1)
@@ -49,7 +47,7 @@ else:
     hou_list =[]
     minute_list = []
 
-    total_read = (24*60*60)/10
+    total_read = (24*60*60)/30
 
 
     while (len(iaq_list)<= total_read):
@@ -81,17 +79,26 @@ else:
 
 
 
+time_str = '06::30::30'
+time_object = datetime.strptime(time_str, '%H::%M::%S')
+x_range = []
+
+for i in range(2880):
+    delta = timedelta(seconds= 30)
+    time_object = time_object + delta
+    x_range.append(time_object)
 
 range = np.arange(30 , (2880*30)+30, 30 , dtype=float)/3600
+xformatter = mdates.DateFormatter('%H:%M')
 
 
 plt.figure(1)
-plt.plot( range , iaq, color = 'red')
+plt.plot( x_range , iaq, color = 'red')
 plt.rcParams["figure.autolayout"] = True
-plt.xticks(np.arange(0,25))
 plt.xlabel('Time in m')
 plt.ylabel("IAQ" )
 plt.title('Gas sensor readings')
+plt.gcf().axes[0].xaxis.set_major_formatter(xformatter)
 plt.savefig('new'+'IAQ' )
 
 
