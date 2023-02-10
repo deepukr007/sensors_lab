@@ -27,7 +27,7 @@ void loop()
        if (millis() - lastCheck >= 10000)
         { 
           lastCheck = millis();
-          Serial.print(bsec.iaq());
+          Serial.print(bsec.b_voc_eq());
           Serial.print(',');
           Serial.print(bsec.co2_eq());
           Serial.print(',');
