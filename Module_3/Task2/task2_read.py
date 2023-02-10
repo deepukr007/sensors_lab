@@ -58,19 +58,20 @@ else:
     np.savez(file,voc=voc , co2 = co2 , accuracy = accuracy  )
 
 
-range = np.arange(10 , (voc.size*10)+10, 10)/60
+range = (np.arange(0 , (voc.size)*10 , 10))
+
 
 plt.figure(1)
 plt.plot(range , voc , color = 'red')
 plt.xlabel('Time in s')
-plt.ylabel("VOC in ppm" )
+plt.ylabel("VOC concentration in ppm" )
 plt.title('VOC readings')
 plt.savefig(ex_name+'voc' )
 
 plt.figure(2)
 plt.plot(range , co2 , color = 'red')
 plt.xlabel('Time in s')
-plt.ylabel(r'$CO_2$ in ppm' )
+plt.ylabel(r'$CO_2$ concentration in ppm' )
 plt.title(r'$CO_2$ readings')
 plt.savefig(ex_name+'co2')
 
