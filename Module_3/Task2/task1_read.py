@@ -11,24 +11,33 @@ x = input()
 
 if(x=='l'):
     loaded = np.load(file)
-    gas = loaded['gas']
+    voc = loaded['voc']
+    co2 = loaded['co2']
 
 else:
-    serial_obj = serial.Serial('COM7', 115200 , timeout=1)
+    serial_obj = serial.Serial('/dev/cu.usbmodem21CBF3D62', 115200 , timeout=1)
     time.sleep(1)
     serial_obj.flush()
     serial_obj.write("r".encode())
     time.sleep(3)
     
+    
+
+    accuracy = 0
+    while(accuracy!=3):
+        read = serial_obj.readline()
+        if(read):
+            read =read.decode().strip().split(',')
+            accuracy = int(read[2])
+            print(read)
+
+    input()
+
+
     voc = []
     co2 =[]
     accuracy= []
 
-    accuracy_read = serial_obj.readline().strip.split(',')[2]
-
-    while(accuracy!=3):
-        print("Accuracy leve 3 is reached")
-    
     while (len(voc)<=60):
                 gas_read = serial_obj.readline()
                 if (gas_read):
@@ -49,21 +58,20 @@ else:
     np.savez(file,voc=voc , co2 = co2 , accuracy = accuracy  )
 
 
-range = (np.arange(0 , (gas.size*100) , 100))/1000
+range = np.arange(10 , (voc.size*10)+10, 10)/60
 
 plt.figure(1)
 plt.plot(range , voc , color = 'red')
 plt.xlabel('Time in s')
 plt.ylabel("VOC" )
 plt.title('Gas sensor readings')
-plt.savefig('Gas_sensor_readings')
+plt.savefig(ex_name+'voc' )
 
 plt.figure(2)
 plt.plot(range , co2 , color = 'blue')
 plt.xlabel('Time in s')
-plt.ylabel("Resitance" )
+plt.ylabel("Co2" )
 plt.title('Gas sensor readings')
-plt.savefig('Gas_sensor_readings')
-
+plt.savefig(ex_name+'co2')
 
 plt.show() 

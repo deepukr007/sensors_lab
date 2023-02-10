@@ -27,14 +27,14 @@ void loop()
        if (millis() - lastCheck >= 10000)
         { 
           lastCheck = millis();
-          Serial.println(bsec.b_voc_eq());
-          Serial.print(',')
+          Serial.print(bsec.iaq());
+          Serial.print(',');
           Serial.print(bsec.co2_eq());
           Serial.print(',');
-          Serial.print(bsec.accuracy());          
+          Serial.println(bsec.accuracy());          
         }
 
-     }s
+     }
 
     }
 }

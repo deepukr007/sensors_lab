@@ -5,7 +5,7 @@ import numpy as np
 from scipy.stats import norm
 
 ex_name = input('Exp_name : ')
-file = 'outfile' + ex_name +'.npz'
+file = 'outfile' + ex_name + '.npz'
 
 x = input()
 
@@ -14,7 +14,7 @@ if(x=='l'):
     gas = loaded['gas']
 
 else:
-    serial_obj = serial.Serial('COM7', 115200 , timeout=1)
+    serial_obj = serial.Serial('/dev/cu.usbmodem0992BE7D2', 115200 , timeout=1)
     time.sleep(1)
     serial_obj.flush()
     serial_obj.write("r".encode())
@@ -36,9 +36,9 @@ else:
     np.savez(file,gas=gas )
 
 
-range = (np.arange(0 , (gas.size*100) , 100))/1000
+range = (np.arange(0 , (gas.size)*10 , 10))
 
-plt.figure(4)
+plt.figure(1)
 plt.plot(range , gas , color = 'red')
 plt.xlabel('Time in s')
 plt.ylabel("Resitance" )
