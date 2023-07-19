@@ -42,6 +42,6 @@ plt.plot(range , gas , color = 'red')
 plt.xlabel('Time in s')
 plt.ylabel("Resitance in \u03A9" )
 plt.title('Gas sensor readings for Perfume')
-plt.savefig('Gas_sensor_readings_'+ex_name)
+plt.savefig('Gas_sensor_readings_'+ ex_name)
 
 plt.show() 

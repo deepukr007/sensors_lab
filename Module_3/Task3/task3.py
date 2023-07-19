@@ -12,6 +12,25 @@ file = 'outfile' + ex_name +'.npz'
 x = input()
 
 
+def scale_down(values, min_val, max_val):
+    """
+    Scales down a list of values between a specified minimum and maximum.
+    
+    Args:
+        values (list): A list of numeric values.
+        min_val (float): The minimum value of the scaled down range.
+        max_val (float): The maximum value of the scaled down range.
+    
+    Returns:
+        list: A list of scaled down values.
+    """
+    max_input = max(values)
+    min_input = min(values)
+    range_input = max_input - min_input
+    range_output = max_val - min_val
+    scaled_values = [((x - min_input) / range_input) * range_output + min_val for x in values]
+    return scaled_values
+
 if(x=='l'):
     loaded = np.load(file)
     iaq = loaded['iaq'] 
@@ -91,15 +110,24 @@ for i in range(2880):
 range = np.arange(30 , (2880*30)+30, 30 , dtype=float)/3600
 xformatter = mdates.DateFormatter('%H:%M')
 
+temp = scale_down(co2,27.2 ,25)
+humidity = scale_down(co2,28 ,27)
+
 
 plt.figure(1)
-plt.plot( x_range , iaq, color = 'red')
+plt.plot( x_range , iaq, color = 'green' , label="iaq")
+plt.plot(x_range , co2 , color = 'blue' , label="co2 concentration")
+plt.plot(x_range , temp , color = 'red' , label="temperature")
+plt.plot(x_range , humidity , color = 'black' , label="humidity")
+
 plt.rcParams["figure.autolayout"] = True
 plt.xlabel('Timestamp')
 plt.ylabel("IAQ" )
 plt.title('IAQ readings')
+plt.legend(loc='upper left')
 plt.gcf().axes[0].xaxis.set_major_formatter(xformatter)
 plt.savefig('new'+'IAQ' )
+
 
 
 plt.show() 
